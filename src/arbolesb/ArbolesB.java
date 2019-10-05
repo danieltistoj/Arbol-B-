@@ -24,13 +24,18 @@ public class ArbolesB {
         arbol.Insertar(10,arbol.getRaiz());
         arbol.Insertar(9,arbol.getRaiz());
         
+        arbol.Insertar(11,arbol.getRaiz());
+        arbol.Insertar(8,arbol.getRaiz());
+        arbol.Insertar(3,arbol.getRaiz());
+        arbol.Insertar(12,arbol.getRaiz());
+        
         System.out.println("Valores Nodo padre");
         for(int num: arbol.getRaiz().getValor()){
             System.out.print(num+", ");
         }
        System.out.println("\nValores Nodos Hijo");
        int conta1=0;
-       while(arbol.getRaiz().getHijo()[conta1]!=null){
+       while(arbol.getRaiz().getHijo()[conta1]!=null && conta1 < arbol.getRaiz().getHijo().length-1){
            Nodo nodo = arbol.getRaiz().getHijo()[conta1];
            for(int conta=0;conta<nodo.getValor().length;conta++){
                System.out.print(nodo.getValor()[conta]+", ");
