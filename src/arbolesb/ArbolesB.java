@@ -18,14 +18,20 @@ public class ArbolesB {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int []valores = new int[3];
-        valores[0] =1;
-        valores[1] = 2;
-        valores [2] = 3;
+        Arbol arbol = new Arbol(4);
+        arbol.Insertar(5,arbol.getRaiz());
+        arbol.Insertar(7,arbol.getRaiz());
+        arbol.Insertar(10,arbol.getRaiz());
+        arbol.Insertar(9,arbol.getRaiz());
         
-       for(int conta = 0; conta<2 ; conta++){
-           System.out.print(valores[conta]);
+        for(int num: arbol.getRaiz().getValor()){
+            System.out.println(num);
+        }
+       Nodo nodo = arbol.getRaiz().getHijo(1);
+       for(int num: nodo.getValor()){
+           System.out.println(num);
        }
+       
         /*
         Scanner input = new Scanner(System.in);
         

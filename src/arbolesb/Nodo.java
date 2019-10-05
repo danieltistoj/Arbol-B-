@@ -25,6 +25,7 @@ public class Nodo {
             hijo = new Nodo [grado]; // asginar hijos
             hoja = true; //todos los nodos son hojas al iniciar
             contador = 0; //contador inicial en cero
+            siguiente = null;
         }
 
         public int getValor(int index) {//obtiene un valor del nodo
