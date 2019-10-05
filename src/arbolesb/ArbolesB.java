@@ -19,29 +19,61 @@ public class ArbolesB {
      */
     public static void main(String[] args) {
         Arbol arbol = new Arbol(4);
-        arbol.Insertar(5,arbol.getRaiz());
-        arbol.Insertar(7,arbol.getRaiz());
-        arbol.Insertar(10,arbol.getRaiz());
-        arbol.Insertar(9,arbol.getRaiz());
+         arbol.Insertar(5,arbol.getRaiz());
         
+        arbol.Insertar(7,arbol.getRaiz());
+       
+        arbol.Insertar(10,arbol.getRaiz());
+        
+        arbol.Insertar(9,arbol.getRaiz());
         arbol.Insertar(11,arbol.getRaiz());
         arbol.Insertar(8,arbol.getRaiz());
         arbol.Insertar(3,arbol.getRaiz());
         arbol.Insertar(12,arbol.getRaiz());
+        /*
+        arbol.Insertar(10,arbol.getRaiz());
+        arbol.Insertar(27,arbol.getRaiz());
+        arbol.Insertar(29,arbol.getRaiz());
+        arbol.Insertar(17,arbol.getRaiz());
         
+        arbol.Insertar(25,arbol.getRaiz());
+        arbol.Insertar(21,arbol.getRaiz());
+        arbol.Insertar(15,arbol.getRaiz());
+        
+        arbol.Insertar(31,arbol.getRaiz());
+        
+        arbol.Insertar(13,arbol.getRaiz());
+       
+        arbol.Insertar(51,arbol.getRaiz());
+        
+        arbol.Insertar(20,arbol.getRaiz());
+        arbol.Insertar(24,arbol.getRaiz());
+        arbol.Insertar(48,arbol.getRaiz());
+        arbol.Insertar(19,arbol.getRaiz());
+        */
+        System.out.println("Cantidad de valores en padre: "+arbol.getRaiz().getContador());
+        //arbol.Insertar(12,arbol.getRaiz());
+            
         System.out.println("Valores Nodo padre");
         for(int num: arbol.getRaiz().getValor()){
             System.out.print(num+", ");
         }
        System.out.println("\nValores Nodos Hijo");
-       int conta1=0;
-       while(arbol.getRaiz().getHijo()[conta1]!=null && conta1 < arbol.getRaiz().getHijo().length-1){
-           Nodo nodo = arbol.getRaiz().getHijo()[conta1];
+       
+       int conta1=0, conta2=0;
+       for(Nodo nodo: arbol.getRaiz().getHijo()){
+           if(nodo!=null){
+               conta1++;
+           }
+       }
+       
+       while(conta2<conta1){
+           Nodo nodo = arbol.getRaiz().getHijo()[conta2];
            for(int conta=0;conta<nodo.getValor().length;conta++){
                System.out.print(nodo.getValor()[conta]+", ");
            }
            System.out.println("");
-           conta1++;
+           conta2++;
        }
        
         /*
