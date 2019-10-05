@@ -75,6 +75,11 @@ public class ArbolesB {
            System.out.println("");
            conta2++;
        }
+        System.out.println("Buscar Valor");
+        System.out.println("Buscar 2: "+arbol.Buscar(2,arbol.getRaiz()));
+        System.out.println("Buscar 5: "+arbol.Buscar(5,arbol.getRaiz()));
+        System.out.println("Buscar 3:"+arbol.Buscar(3,arbol.getRaiz()));
+        System.out.println("Buscar 7:"+arbol.Buscar(7,arbol.getRaiz()));
        
         /*
         Scanner input = new Scanner(System.in);

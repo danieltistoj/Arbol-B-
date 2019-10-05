@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class Arbol {
     private Nodo raiz;
     private int grado;
-    private int altura =0, PosicionDelHijo, valorAsubir;
+    private int altura =0, PosicionDelHijo, valorAsubir, contador;
 
     public Arbol(int grado) {
         this.grado = grado;
@@ -157,6 +157,19 @@ public class Arbol {
             
             padre.getHijo()[PosicionDelHijo] = ValoresMenor;
             padre.getHijo()[PosicionDelHijo+1] = ValoresIgualMayor;
+            //*** Lo que hace el siguinete codigo es une un hijo con otro con apuntadores. 
+            //nodo[0]--->nodo[1]--->nodo[2]--->null
+            int conta=0, conta2=0;
+            for(Nodo nodo: padre.getHijo()){
+                if(nodo!=null){
+                    conta++;
+                }
+            }
+            
+            while(conta2<conta-1){
+                padre.getHijo()[conta2].setSiguiente(padre.getHijo()[conta2+1]);
+                conta2++;
+            }
             
             
         }  
@@ -165,6 +178,7 @@ public class Arbol {
         }
           
     }
+    
     public void Insertar(int valor, Nodo nodo_actual){
       
         if(nodo_actual.getContador() != grado - 1){
@@ -179,6 +193,36 @@ public class Arbol {
             
         }
         
+    }
+    private void BuscarValor(int valor, Nodo nodo_actual){
+        if(nodo_actual!=null){
+            for(int num : nodo_actual.getValor()){
+                if(num == valor){
+                    contador++;
+                }
+            }
+            
+            BuscarValor(valor, nodo_actual.getSiguiente());
+        }
+        
+    }
+    public boolean Buscar(int valor, Nodo nodo_actual){
+        contador=0;
+        boolean existe;
+        if(nodo_actual.esHoja()){
+            BuscarValor(valor, nodo_actual);
+            if(contador>0){
+                existe = true;
+            }
+            else{
+                existe = false;
+            }
+            
+        }
+        else{
+          existe =  Buscar(valor, nodo_actual.getHijo()[0]);
+        }
+        return existe;
     }
     
  
