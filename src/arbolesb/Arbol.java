@@ -136,7 +136,8 @@ public class Arbol {
         }
         
         else if(nodo_actual.getPadre()!=null&&nodo_actual.esHoja()){// esta division es cuando el nodo a dividir tiene como padre un valor distinto de nulo pero el es una hoja, osea no tiene hijos.
-            
+            Nodo padre = nodo_actual.getPadre(); // obtener el padre
+            if(padre.getPadre() == null){
             //*** obtener nuevos nodos 
             
             Nodo []NuevosHijos = ObtenerHijos(valor, nodo_actual); // se obtienen los dos nuevos nodos. 
@@ -144,7 +145,7 @@ public class Arbol {
           
             
             // *** Insertar El valor que debe subir de acuerdo a la formula grado/2 que es la posicion del valor que deberia subir al nodo padre.  
-            Nodo padre = nodo_actual.getPadre(); // obtener el padre
+            
             int posicion = padre.getContador();// obtener la ultima posicio disponible 
             //padre.getValor()[posicion] = valorAsubir; // insertar el valor en el array del nodo padre 
             padre = OrdenarArray(valorAsubir,padre);// se insertar el valor a subir en la posicion corespondiente. 
@@ -171,7 +172,7 @@ public class Arbol {
                 conta2++;
             }
             
-            
+            }//fin de if
         }  
         else if(nodo_actual.getPadre()==null&&!nodo_actual.esHoja()){
             
