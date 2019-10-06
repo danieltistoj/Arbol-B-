@@ -32,7 +32,18 @@ public class Arbol {
                         nodo_actual.getValor()[posicion] = nodo_actual.getValor()[posicion - 1];//desplaza los valores
                         posicion--;//desde posición maxima a minima
                     }
-
+                /*
+                    if(nodo_actual.getPadre()!=null){
+                        for(int num:nodo_actual.getPadre().getValor()){
+                            System.out.print(num+", ");
+                        }
+                        System.out.println("");
+                        for(int num:nodo_actual.getValor()){
+                            System.out.print(num+", ");
+                        }
+                        System.out.println("");
+                    }
+                */
                     nodo_actual.getValor()[posicion] = valor;//Luego de ordenar se inserta el valor
                     nodo_actual.setContador(nodo_actual.getContador()+1); //incrementar el numero de valores
                 }
@@ -42,6 +53,8 @@ public class Arbol {
             while (PosicionDelHijo < nodo_actual.getContador() && valor > nodo_actual.getValor()[PosicionDelHijo]) {   //Busca la posición del hijo a recorrer			             		
                 PosicionDelHijo++;
             }
+         
+          
             if (nodo_actual.getHijo()[PosicionDelHijo].getContador() == grado - 1) {
                 Dividir(valor, nodo_actual.getHijo()[PosicionDelHijo]);//Divide el nodo x, index j
                 if (valor > nodo_actual.getValor()[PosicionDelHijo]) {
@@ -71,7 +84,7 @@ public class Arbol {
                         nodo_actual.getValor()[posicion] = nodo_actual.getValor()[posicion - 1];//desplaza los valores
                         posicion--;//desde posición maxima a minima
                     }
-
+                   
                     nodo_actual.getValor()[posicion] = valor;//Luego de ordenar se inserta el valor
                     nodo_actual.setContador(nodo_actual.getContador()+1); //incrementar el numero de valores
                 
@@ -82,8 +95,13 @@ public class Arbol {
       que resulten de la division tendran este mismo padre. 
       Si el nodo a dividir no tiene padre y es una hoja los nodos que resulten de la division tendran el nodo que se dividion.*/
     private Nodo[] ObtenerHijos(int valor, Nodo nodo_actual){
-          Nodo Hijos[] = new Nodo[2]; // creamos este array de nodos para que los nodos resultantes de la division puedan ser enviados donde se llamo la funcion 
-          Nodo ValoresMenor, ValoresIgualMayor; 
+        Nodo Hijos[] = new Nodo[2]; // creamos este array de nodos para que los nodos resultantes de la division puedan ser enviados donde se llamo la funcion 
+        Nodo ValoresMenor, ValoresIgualMayor; 
+        int conta=0,posicionAdividir;//Se crea una variable que obtendra la posicion del valor que debe de subir.
+        posicionAdividir = ((this.grado-1)/2); // se encuentra la posicion del valor que tiene que subir, la posicion del valor que ahora pasara a estar en el arreglo del nodo padre.
+        
+        if(nodo_actual.esHoja()){ // si el nodo es una hoja 
+     
           //Se inicializan los nodos nuevos nodos y se les asigna un padre segun las condiciones.
           if(nodo_actual.getPadre()!=null){ // si el nodo tiene un padre los nuevos nodos tendran que tener el mismo padre
              ValoresMenor = new Nodo(grado,nodo_actual.getPadre());
@@ -96,15 +114,14 @@ public class Arbol {
            
            
             int []array_aux = new int[this.grado];//Se crea un array con una posicion mas que los array que contienen los nodos para los valores. 
-            int conta=0,posicionAdividir;//Se crea una variable que obtendra la posicion del valor que debe de subir.
+            
             for(int num:nodo_actual.getValor()){//pasamos todos los valores del nodo que queremos dividir al array auxiliar 
                 array_aux[conta] = num;
                 conta++;
             }
             array_aux[this.grado-1] = valor;//ingresamos en la ultima posicion el nuevo valor. 
             Arrays.sort(array_aux);// se ordena el array auxiliar. 
-            
-            posicionAdividir = (this.grado/2); // se encuentra la posicion del valor que tiene que subir, la posicion del valor que ahora pasara a estar en el arreglo del nodo padre.
+           
             valorAsubir = array_aux[posicionAdividir];// se encuentra el valor que debe se subir o ser insertado en el array del nodo padre, este valor no es necesariamente el nuevo valor nuevo. 
             for(conta=0; conta<posicionAdividir ;conta++){ // con este ciclo insertamos los valores en el nodo o hijo que tendra los valores menores al numero que va a subir, que es el numero que tenga la posicion m/2. 
                 InsertarValor(array_aux[conta],ValoresMenor);
@@ -112,14 +129,53 @@ public class Arbol {
             for(conta = posicionAdividir; conta<grado; conta++){// con este ciclo insertamos los valores en el nodo o hijo que tendra los valores iguales o mayores a el numero que va a subir y que estara en el nodo padre. 
                 InsertarValor(array_aux[conta],ValoresIgualMayor);
             }
-            Hijos[0] = ValoresMenor;
-            Hijos[1] = ValoresIgualMayor;
+           
+        }
+        else{
+          
+            ValoresMenor = new Nodo(grado,nodo_actual);
+            ValoresIgualMayor = new Nodo(grado,nodo_actual); // se crean los hijos del nodo padre
+            valorAsubir = nodo_actual.getValor(posicionAdividir);
+           //pasar los valores a los nuevos nodos 
+           int i = 0;
+           for( i=0; i<posicionAdividir;i++){
+               OrdenarArray(nodo_actual.getValor()[i], ValoresMenor);
+               ValoresMenor.setContador(ValoresMenor.getContador()+1);
+           }
+           int j=0;
+           for( i=posicionAdividir+1; i<grado-1;i++){
+               ValoresIgualMayor.getValor()[j] = nodo_actual.getValor()[i];
+               ValoresIgualMayor.setContador(ValoresIgualMayor.getContador()+1);
+               j++;
+           }
+           //pasar los hijos a cada nuevo nodo 
+           for(i=0;i<=posicionAdividir;i++){
+               ValoresMenor.getHijo()[i] = nodo_actual.getHijo()[i];
+               ValoresMenor.getHijo()[i].setPadre(ValoresMenor);
+               
+           }
+           j=0;
+           
+           for(i=posicionAdividir+1;i<grado;i++){
+               
+               ValoresIgualMayor.getHijo()[j] = nodo_actual.getHijo()[i];
+               ValoresIgualMayor.getHijo()[j].setPadre(ValoresIgualMayor);
+               j++;
+           }
+          
+           ValoresIgualMayor.setHoja(false);
+           ValoresMenor.setHoja(false);
+         
+        }
+         Hijos[0] = ValoresMenor;
+         Hijos[1] = ValoresIgualMayor;
+         
         return Hijos;
         
     }
     
     private void Dividir(int valor, Nodo nodo_actual){
-        if(nodo_actual.getPadre()==null&&nodo_actual.esHoja()){ // esta condicion es cuando se realiza la primera division en un arbol b+, para que se trasforme en un arbol b+ de 2 niveles.
+        if(nodo_actual.getPadre()==null){ // esta condicion es cuando se realiza la primera division en un arbol b+, para que se trasforme en un arbol b+ de 2 niveles.
             
             int [] nuevoArrayPadre = new int[this.grado-1];// se crea un array nuevo, esto con el fin de igualarlo al nodo_actual para que se le borren todos los valores que tenia.
             Nodo []NuevosHijos = ObtenerHijos(valor, nodo_actual);// se obtienen los dos nodos, en los cuales puede estar integrado el valor a insertar, y que con en estos nodos uno tiene los valores menores al valor segun m/2 y otro los valore igual y mayor a este valor en dicha posicion
@@ -128,18 +184,23 @@ public class Arbol {
             nodo_actual.setValor(nuevoArrayPadre);// el nodo padre en principio se deja sin hijos, con esto es como si el padre ubiera sino inicializado sin hijos
             nodo_actual.setContador(0);// el contador de valores se deja a cero 
             nodo_actual.setHoja(false);// ahora el nodo padre no sera una hoja 
+           
             nodo_actual.getValor()[0] = valorAsubir; //se ingresa el valor a subir en la posicion cero. 
+            
             nodo_actual.setContador(1);// le aumenta 1 al contador por el valor que acaba de insertar 
             //se ingresan en las al array de hijos los nodos que contiene los valores menores y mayores e igual, al valor que se subio. 
             nodo_actual.getHijo()[0]= ValoresMenor;
-            nodo_actual.getHijo()[1] = ValoresIgualMayor;     
+            nodo_actual.getHijo()[1] = ValoresIgualMayor;   
+  
+
         }
         
-        else if(nodo_actual.getPadre()!=null&&nodo_actual.esHoja()){// esta division es cuando el nodo a dividir tiene como padre un valor distinto de nulo pero el es una hoja, osea no tiene hijos.
+        else if(nodo_actual.getPadre()!=null){// esta division es cuando el nodo a dividir tiene como padre un valor distinto de nulo pero el es una hoja, osea no tiene hijos.
             Nodo padre = nodo_actual.getPadre(); // obtener el padre
-            if(padre.getPadre() == null){
-            //*** obtener nuevos nodos 
             
+            if(padre.getContador()!=grado-1){// esto es si el padre aun tiene espacio para ingresar valores en el array 
+            //*** obtener nuevos nodos 
+           
             Nodo []NuevosHijos = ObtenerHijos(valor, nodo_actual); // se obtienen los dos nuevos nodos. 
             Nodo ValoresMenor = NuevosHijos[0], ValoresIgualMayor = NuevosHijos[1];
           
@@ -147,6 +208,7 @@ public class Arbol {
             // *** Insertar El valor que debe subir de acuerdo a la formula grado/2 que es la posicion del valor que deberia subir al nodo padre.  
             
             int posicion = padre.getContador();// obtener la ultima posicio disponible 
+               
             //padre.getValor()[posicion] = valorAsubir; // insertar el valor en el array del nodo padre 
             padre = OrdenarArray(valorAsubir,padre);// se insertar el valor a subir en la posicion corespondiente. 
            
@@ -173,6 +235,13 @@ public class Arbol {
             }
             
             }//fin de if
+            else{// esta condicion es cuando en el nodo padre ya no tiene espacio para mas valores 
+                
+                Dividir(valor, padre);
+               
+                Insertar(valor, padre);
+                
+            }
         }  
         else if(nodo_actual.getPadre()==null&&!nodo_actual.esHoja()){
             
@@ -186,10 +255,12 @@ public class Arbol {
             
             InsertarValor(valor,nodo_actual);
         }
-        else if((nodo_actual.getContador() == grado - 1)&&!nodo_actual.esHoja()){ //si el nodo actual esta lleno pero no es hoja se manda a la funcion que inserta valores 
-             InsertarValor(valor,nodo_actual);
+        else if((nodo_actual.getContador() == grado - 1)&&nodo_actual.esHoja()==false){ //si el nodo actual esta lleno pero no es hoja se manda a la funcion que inserta valores 
+        
+            InsertarValor(valor,nodo_actual);
         }
         else{
+          
             Dividir(valor, nodo_actual);
             
         }
