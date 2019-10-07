@@ -26,6 +26,7 @@ public class ArbolesB {
        
         arbol.Insertar(10,arbol.getRaiz());
         
+        
         arbol.Insertar(9,arbol.getRaiz());
         arbol.Insertar(11,arbol.getRaiz());
         arbol.Insertar(8,arbol.getRaiz());
@@ -57,11 +58,14 @@ public class ArbolesB {
         */
         
         System.out.println("Cantidad de valores en padre: "+arbol.getRaiz().getContador());
+        System.out.println("La altura del arbol es: "+arbol.Altura(arbol.getRaiz()));
+        System.out.println("el nivel del valor 6: "+arbol.RetornarNivelNodo(6,arbol.getRaiz()));
         //arbol.Insertar(12,arbol.getRaiz());
          
         System.out.println("");
         arbol.Enlazar(arbol.getRaiz());
         arbol.Mostrar(arbol.getRaiz());
+        System.out.println(arbol.getCadena());
         System.out.println("Buscar Valor");
         System.out.println("Buscar 2: "+arbol.Buscar(2,arbol.getRaiz()));
         System.out.println("Buscar 5: "+arbol.Buscar(5,arbol.getRaiz()));

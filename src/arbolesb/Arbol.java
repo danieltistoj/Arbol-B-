@@ -17,6 +17,7 @@ public class Arbol {
     private int grado;
     private int altura =0, PosicionDelHijo, valorAsubir, contador;
     private boolean VolverAinsertar;
+    private String cadena = "";
   
     public Arbol(int grado) {
         this.grado = grado;
@@ -247,6 +248,7 @@ public class Arbol {
         }
         
     }
+    //buscar un valor 
     private void BuscarValor(int valor, Nodo nodo_actual){
         if(nodo_actual!=null){
             for(int num : nodo_actual.getValor()){
@@ -277,7 +279,7 @@ public class Arbol {
         }
         return existe;
     }
-    
+    //enlazar cada nodo 
     private void EnlazarNodos(int conta, ArrayList<Nodo> ListaNodos){
         ArrayList <Nodo> array_aux = new ArrayList<Nodo>();
         Nodo array_aux2[] = new Nodo[ListaNodos.size()];
@@ -314,6 +316,7 @@ public class Arbol {
        ListaNodos.add(nodo_actual);
        EnlazarNodos(0,ListaNodos);
    }
+   //retornar altura del arbol
     public int Altura(Nodo nodo){
        int conta = 0;
         while(nodo!=null){
@@ -324,31 +327,62 @@ public class Arbol {
         }
         return conta;
     }
+    //mostrar 
     private void MostrarDatos(int conta,Nodo nodo_actual){
         Nodo nodo_aux = nodo_actual;
         if(conta<altura){
-            System.out.println("Nivel "+(conta+1));
+            cadena += "Nivel "+(conta+1)+"\n";
             
             while(nodo_actual!=null){
-                System.out.print("[ ");
+               cadena+="[ ";
                 for(int num: nodo_actual.getValor()){
-                    System.out.print(num+", ");
+                    cadena+=num+", ";
                 }
                 if(nodo_actual.getSiguiente() == null){
-                    System.out.print("] --> null");
+                    cadena+="] --> null";
                 }
                 else{
-                    System.out.print("] --> ");
+                    cadena+="] --> ";
                 }
                 nodo_actual = nodo_actual.getSiguiente(); 
             }
             conta++;
-            System.out.println("");
+            cadena+="\n";
             MostrarDatos(conta,nodo_aux.getHijo()[0]);  
         }
        
         
+        
     }
+
+     public void Mostrar(Nodo nodo_actual){
+        cadena = "";
+        altura = Altura(nodo_actual);
+        MostrarDatos(0,nodo_actual);
+    }
+     
+     //fin de mostrar 
+     
+     //Retornar nivel del nodo
+     public int RetornarNivelNodo(int valor,Nodo nodo_actual){
+         boolean existe_aux;
+         altura = Altura(nodo_actual);
+         existe_aux = Buscar(valor, nodo_actual);
+         if(existe_aux){
+             return altura;
+         }
+         else{
+             return 0;
+         }
+     }
+    public String getCadena() {
+        return cadena;
+    }
+
+    public void setCadena(String cadena) {
+        this.cadena = cadena;
+    }
+    
     public int NumeroDeHijos(Nodo nodo){
         int numHijos = 0;
         for(Nodo hijo : nodo.getHijo()){
@@ -358,10 +392,7 @@ public class Arbol {
         }
         return numHijos;
     }
-    public void Mostrar(Nodo nodo_actual){
-        altura = Altura(nodo_actual);
-        MostrarDatos(0,nodo_actual);
-    }
+   
     public Nodo getRaiz() {
         return raiz;
     }
