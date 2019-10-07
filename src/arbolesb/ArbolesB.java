@@ -33,6 +33,7 @@ public class ArbolesB {
         arbol.Insertar(12,arbol.getRaiz());
         arbol.Insertar(13,arbol.getRaiz());
         
+        
         /*
         arbol.Insertar(10,arbol.getRaiz());
         arbol.Insertar(27,arbol.getRaiz());
@@ -57,24 +58,10 @@ public class ArbolesB {
         
         System.out.println("Cantidad de valores en padre: "+arbol.getRaiz().getContador());
         //arbol.Insertar(12,arbol.getRaiz());
-            
-        System.out.println("Valores Nodo padre");
-        for(int num: arbol.getRaiz().getValor()){
-            System.out.print(num+", ");
-        }
-       System.out.println("\nValores Nodos Hijo");
-       for(int num:arbol.getRaiz().getHijo()[0].getValor()){
-           System.out.print(num+", ");
-       }
+         
         System.out.println("");
-       for(int num:arbol.getRaiz().getHijo()[1].getValor()){
-           System.out.print(num+", ");
-       }
-      
-        System.out.println("");
-        
-        System.out.println(arbol.Altura(arbol.getRaiz()));
         arbol.Enlazar(arbol.getRaiz());
+        arbol.Mostrar(arbol.getRaiz());
         System.out.println("Buscar Valor");
         System.out.println("Buscar 2: "+arbol.Buscar(2,arbol.getRaiz()));
         System.out.println("Buscar 5: "+arbol.Buscar(5,arbol.getRaiz()));

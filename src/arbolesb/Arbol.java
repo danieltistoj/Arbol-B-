@@ -129,7 +129,7 @@ public class Arbol {
            
         }
         else{
-          
+           
             ValoresMenor = new Nodo(grado,nodo_actual);
             ValoresIgualMayor = new Nodo(grado,nodo_actual); // se crean los hijos del nodo padre
             valorAsubir = nodo_actual.getValor(posicionAdividir);
@@ -173,12 +173,13 @@ public class Arbol {
     
     private void Dividir(int valor, Nodo nodo_actual){
         if(nodo_actual.getPadre()==null){ // esta condicion es cuando se realiza la primera division en un arbol b+, para que se trasforme en un arbol b+ de 2 niveles.
-            
+            Nodo nodo[] =new Nodo[grado];
             int [] nuevoArrayPadre = new int[this.grado-1];// se crea un array nuevo, esto con el fin de igualarlo al nodo_actual para que se le borren todos los valores que tenia.
             Nodo []NuevosHijos = ObtenerHijos(valor, nodo_actual);// se obtienen los dos nodos, en los cuales puede estar integrado el valor a insertar, y que con en estos nodos uno tiene los valores menores al valor segun m/2 y otro los valore igual y mayor a este valor en dicha posicion
             Nodo ValoresMenor = NuevosHijos[0], ValoresIgualMayor = NuevosHijos[1]; // se asiganan los nodos de resultantes de la division en variables tipo nodo
             
             nodo_actual.setValor(nuevoArrayPadre);// el nodo padre en principio se deja sin hijos, con esto es como si el padre ubiera sino inicializado sin hijos
+            nodo_actual.setHijo(nodo);// se deja el array de nodos como uno nuevo 
             nodo_actual.setContador(0);// el contador de valores se deja a cero 
             nodo_actual.setHoja(false);// ahora el nodo padre no sera una hoja 
            
@@ -188,6 +189,7 @@ public class Arbol {
             //se ingresan en las al array de hijos los nodos que contiene los valores menores y mayores e igual, al valor que se subio. 
             nodo_actual.getHijo()[0]= ValoresMenor;
             nodo_actual.getHijo()[1] = ValoresIgualMayor;
+            Enlazar(nodo_actual);// se enlazan todos los nodos de cada nivel
         }
         
         else if(nodo_actual.getPadre()!=null){// esta division es cuando el nodo a dividir tiene como padre un valor distinto de nulo pero el es una hoja, osea no tiene hijos.
@@ -213,35 +215,18 @@ public class Arbol {
             //*** Se ingresan los nuevos valores en el array de hijos del nodo padre.  
             padre.getHijo()[PosicionDelHijo] = ValoresMenor;
             padre.getHijo()[PosicionDelHijo+1] = ValoresIgualMayor;
+            Enlazar(padre);//se enlazan los nodos de cada nivel
             
-            //*** Lo que hace el siguinete codigo es une un hijo con otro con apuntadores. 
-            //nodo[0]--->nodo[1]--->nodo[2]--->null
-                Enlazar(padre);
-            /*
-            int conta=0, conta2=0;
-            for(Nodo nodo: padre.getHijo()){
-                if(nodo!=null){
-                    conta++;
-                }
-            }
-            
-            while(conta2<conta-1){
-                padre.getHijo()[conta2].setSiguiente(padre.getHijo()[conta2+1]);
-                conta2++;
-            }
-            */
             }//fin de if
             else{// esta condicion es cuando en el nodo padre ya no tiene espacio para mas valores 
+              
                 Dividir(valor, padre);
                 Insertar(valor,padre);
-                Enlazar(padre);
+                Enlazar(padre);// se enlazan los nodos de cada nivel
                 
                 
             }
         }  
-        else if(nodo_actual.getPadre()==null&&!nodo_actual.esHoja()){
-            
-        }
           
     }
     
@@ -338,6 +323,44 @@ public class Arbol {
             
         }
         return conta;
+    }
+    private void MostrarDatos(int conta,Nodo nodo_actual){
+        Nodo nodo_aux = nodo_actual;
+        if(conta<altura){
+            System.out.println("Nivel "+(conta+1));
+            
+            while(nodo_actual!=null){
+                System.out.print("[ ");
+                for(int num: nodo_actual.getValor()){
+                    System.out.print(num+", ");
+                }
+                if(nodo_actual.getSiguiente() == null){
+                    System.out.print("] --> null");
+                }
+                else{
+                    System.out.print("] --> ");
+                }
+                nodo_actual = nodo_actual.getSiguiente(); 
+            }
+            conta++;
+            System.out.println("");
+            MostrarDatos(conta,nodo_aux.getHijo()[0]);  
+        }
+       
+        
+    }
+    public int NumeroDeHijos(Nodo nodo){
+        int numHijos = 0;
+        for(Nodo hijo : nodo.getHijo()){
+            if(hijo!=null){
+                numHijos++;
+            }
+        }
+        return numHijos;
+    }
+    public void Mostrar(Nodo nodo_actual){
+        altura = Altura(nodo_actual);
+        MostrarDatos(0,nodo_actual);
     }
     public Nodo getRaiz() {
         return raiz;
