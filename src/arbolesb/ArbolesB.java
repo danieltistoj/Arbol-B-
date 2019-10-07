@@ -63,32 +63,24 @@ public class ArbolesB {
             System.out.print(num+", ");
         }
        System.out.println("\nValores Nodos Hijo");
+       for(int num:arbol.getRaiz().getHijo()[0].getValor()){
+           System.out.print(num+", ");
+       }
+        System.out.println("");
        for(int num:arbol.getRaiz().getHijo()[1].getValor()){
-           System.out.println(num);
+           System.out.print(num+", ");
        }
+      
+        System.out.println("");
         
-       /*
-       int conta1=0, conta2=0;
-       for(Nodo nodo: arbol.getRaiz().getHijo()){
-           if(nodo!=null){
-               conta1++;
-           }
-       }
-       
-       while(conta2<conta1){
-           Nodo nodo = arbol.getRaiz().getHijo()[conta2];
-           for(int conta=0;conta<nodo.getValor().length;conta++){
-               System.out.print(nodo.getValor()[conta]+", ");
-           }
-           System.out.println("");
-           conta2++;
-       }
-       */
+        System.out.println(arbol.Altura(arbol.getRaiz()));
+        arbol.Enlazar(arbol.getRaiz());
         System.out.println("Buscar Valor");
         System.out.println("Buscar 2: "+arbol.Buscar(2,arbol.getRaiz()));
         System.out.println("Buscar 5: "+arbol.Buscar(5,arbol.getRaiz()));
         System.out.println("Buscar 3:"+arbol.Buscar(3,arbol.getRaiz()));
         System.out.println("Buscar 7:"+arbol.Buscar(7,arbol.getRaiz()));
+         System.out.println("Buscar 13:"+arbol.Buscar(13,arbol.getRaiz()));
        
         /*
         Scanner input = new Scanner(System.in);
