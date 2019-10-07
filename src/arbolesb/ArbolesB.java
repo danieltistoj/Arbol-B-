@@ -59,19 +59,39 @@ public class ArbolesB {
         
         System.out.println("Cantidad de valores en padre: "+arbol.getRaiz().getContador());
         System.out.println("La altura del arbol es: "+arbol.Altura(arbol.getRaiz()));
-        System.out.println("el nivel del valor 6: "+arbol.RetornarNivelNodo(6,arbol.getRaiz()));
-        //arbol.Insertar(12,arbol.getRaiz());
-         
+       
         System.out.println("");
+        
         arbol.Enlazar(arbol.getRaiz());
         arbol.Mostrar(arbol.getRaiz());
         System.out.println(arbol.getCadena());
+        arbol.Eliminar(11,arbol.getRaiz());
+        System.out.println("");
+        arbol.Mostrar(arbol.getRaiz());
+        System.out.println(arbol.getCadena());
+        
+        arbol.Eliminar(8,arbol.getRaiz());
+        System.out.println("");
+        arbol.Mostrar(arbol.getRaiz());
+        System.out.println(arbol.getCadena());
+        
+        arbol.Eliminar(3,arbol.getRaiz());
+        System.out.println("");
+        arbol.Mostrar(arbol.getRaiz());
+        System.out.println(arbol.getCadena());
+        
+        arbol.Eliminar(12,arbol.getRaiz());
+        System.out.println("");
+        arbol.Mostrar(arbol.getRaiz());
+        System.out.println(arbol.getCadena());
+        /*
         System.out.println("Buscar Valor");
         System.out.println("Buscar 2: "+arbol.Buscar(2,arbol.getRaiz()));
         System.out.println("Buscar 5: "+arbol.Buscar(5,arbol.getRaiz()));
         System.out.println("Buscar 3:"+arbol.Buscar(3,arbol.getRaiz()));
         System.out.println("Buscar 7:"+arbol.Buscar(7,arbol.getRaiz()));
          System.out.println("Buscar 13:"+arbol.Buscar(13,arbol.getRaiz()));
+        */
        
         /*
         Scanner input = new Scanner(System.in);

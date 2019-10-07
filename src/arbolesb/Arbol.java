@@ -375,6 +375,61 @@ public class Arbol {
              return 0;
          }
      }
+     //Eliminar 
+     private Nodo ObtenerUltimoNivel(Nodo nodo_actual){
+         int conta=0;
+         altura = Altura(nodo_actual);
+         while(conta<(altura-1)){
+             nodo_actual = nodo_actual.getHijo()[0];
+             conta++;
+         }
+         return nodo_actual;
+         
+     }
+     public void Eliminar(int valor, Nodo nodo_actual){
+         //debe verce si el valor existe 
+         if(Buscar(valor, nodo_actual)){
+             Nodo nodo_aux;
+              nodo_aux = ObtenerUltimoNivel(nodo_actual);// se obtiene el valor mas a la izquierda del ultimo nivel ;
+             
+             int conta=0;
+             while(conta == 0){ // se busca que nodo en el ultimo nivel contiene el valor 
+                 for(int num: nodo_aux.getValor()){
+                     if(num == valor){
+                         conta++;
+                     }
+                 }
+                 if(conta == 0){
+                      nodo_aux = nodo_aux.getSiguiente();
+                 }
+                 
+             }
+             //ya encontrado el nodo se ve si tiene los valores minimos para borrar. 
+             if(nodo_aux.getContador()>=(grado/2)){
+                 ArrayList<Integer> array_aux = new ArrayList<Integer>();
+                 for(int num:nodo_aux.getValor()){
+                     if(num!=valor&&num!=0){
+                         array_aux.add(num);
+                     }
+                 }
+             
+                 int aux[] = new int[grado-1];
+                 nodo_aux.setValor(aux);//se deja el array de valores a cero
+                 nodo_aux.setContador(0);
+                 for(int num: array_aux){
+                     OrdenarArray(num, nodo_aux);
+                 }
+                 
+                 
+             }
+             else{
+                 System.out.println("Redistribuir");
+             }
+         }
+         else{
+             System.out.println("El valor no existe");
+         }
+     }
     public String getCadena() {
         return cadena;
     }
