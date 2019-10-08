@@ -321,7 +321,6 @@ public class Arbol {
        int conta = 0;
         while(nodo!=null){
            nodo = nodo.getHijo()[0];
-            
             conta++;
             
         }
@@ -386,7 +385,7 @@ public class Arbol {
          return nodo_actual;
          
      }
-     public void Eliminar(int valor, Nodo nodo_actual){
+     public String Eliminar(int valor, Nodo nodo_actual){
          //debe verce si el valor existe 
          if(Buscar(valor, nodo_actual)){
              Nodo nodo_aux;
@@ -405,7 +404,7 @@ public class Arbol {
                  
              }
              //ya encontrado el nodo se ve si tiene los valores minimos para borrar. 
-             if(nodo_aux.getContador()>=(grado/2)){
+             if(nodo_aux.getContador()>(grado/2)){
                  ArrayList<Integer> array_aux = new ArrayList<Integer>();
                  for(int num:nodo_aux.getValor()){
                      if(num!=valor&&num!=0){
@@ -419,16 +418,18 @@ public class Arbol {
                  for(int num: array_aux){
                      OrdenarArray(num, nodo_aux);
                  }
-                 
+                 cadena = "El valor se elimino correctamente";
                  
              }
              else{
-                 System.out.println("Redistribuir");
+                cadena = "El valor no se puede eliminaar porque el nodo debe de tener mas valores a la cantidad minima\n"+
+                        "Cantidad de valores > (grado/2)";
              }
          }
          else{
-             System.out.println("El valor no existe");
+             cadena = "El valor no existes";
          }
+         return cadena;
      }
     public String getCadena() {
         return cadena;

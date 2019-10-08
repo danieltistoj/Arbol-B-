@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
         boton_insertar.setEnabled(false);
         boton_obtener_altura.setEnabled(false);
         boton_obtener_nivel.setEnabled(false);
+        boton_reiniciar.setEnabled(false);
         
         boto_CrearArbol.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         boton_borrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -37,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         boton_insertar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         boton_obtener_altura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         boton_obtener_nivel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        boton_reiniciar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         
         Imagen img1 = new Imagen("/Imagenes/fondo_sistema6.jpg", 807, 453);
@@ -69,6 +71,8 @@ public class Menu extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        boton_reiniciar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,9 +118,19 @@ public class Menu extends javax.swing.JFrame {
 
         boton_obtener_altura.setBackground(new java.awt.Color(255, 255, 255));
         boton_obtener_altura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arbolesb/altura1.1.png"))); // NOI18N
+        boton_obtener_altura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_obtener_alturaActionPerformed(evt);
+            }
+        });
 
         boton_obtener_nivel.setBackground(new java.awt.Color(255, 255, 255));
         boton_obtener_nivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arbolesb/nivel2.1.png"))); // NOI18N
+        boton_obtener_nivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_obtener_nivelActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +160,17 @@ public class Menu extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nivel Del Nodo");
 
+        boton_reiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arbolesb/reiniciar1.1.png"))); // NOI18N
+        boton_reiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_reiniciarActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Reiniciar ");
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -166,9 +191,6 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -176,7 +198,13 @@ public class Menu extends javax.swing.JFrame {
                             .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(boton_borrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(59, 59, 59))))
+                        .addGap(59, 59, 59))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boton_reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53))))
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelLayout.createSequentialGroup()
@@ -191,9 +219,13 @@ public class Menu extends javax.swing.JFrame {
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(boto_CrearArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(boto_CrearArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -231,9 +263,17 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//boton eliminar 
     private void boton_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_borrarActionPerformed
-        // TODO add your handling code here:
+        String cadena_valor = JOptionPane.showInputDialog("Ingrese el valor que desea eliminar"),cadena;
+        try {
+            int valor = Integer.parseInt(cadena_valor);
+            cadena = arbol.Eliminar(valor,arbol.getRaiz());
+            JOptionPane.showMessageDialog(null,cadena,"",JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Ingrese solo valores numericos, y no deje el campo vacio","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_boton_borrarActionPerformed
 //inicializar el arbol
     private void boto_CrearArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boto_CrearArbolActionPerformed
@@ -271,6 +311,8 @@ public class Menu extends javax.swing.JFrame {
                 boton_insertar.setEnabled(true);
                 boton_obtener_altura.setEnabled(true);
                 boton_obtener_nivel.setEnabled(true);
+                boton_reiniciar.setEnabled(true);
+                boto_CrearArbol.setEnabled(false);
                
                JOptionPane.showMessageDialog(null,"Arbol creado con exito","Arbol creado",JOptionPane.INFORMATION_MESSAGE); 
                  
@@ -339,6 +381,47 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_boton_buscar_valorActionPerformed
 
+    private void boton_obtener_alturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_obtener_alturaActionPerformed
+        
+        JOptionPane.showMessageDialog(null,"La altura del arbol es: "+arbol.Altura(arbol.getRaiz()),"Altura",JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_boton_obtener_alturaActionPerformed
+
+    private void boton_obtener_nivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_obtener_nivelActionPerformed
+         String cadena_valor = JOptionPane.showInputDialog("Ingrese el valor que quiere buscar"),numeroAingresar;
+        try {
+            int valor = Integer.parseInt(cadena_valor), nivel;
+            nivel = arbol.RetornarNivelNodo(valor,arbol.getRaiz());
+            nivel = nivel-1;
+            if(nivel<0){
+                JOptionPane.showMessageDialog(null,"El valor no existe","",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"El nivel del valor es: "+nivel,"Mensaje",JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Ingrese solo valores numericos, y no deje el campo vacio","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_boton_obtener_nivelActionPerformed
+
+    private void boton_reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_reiniciarActionPerformed
+      int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de reiniciar?", "Alerta", JOptionPane.YES_NO_OPTION);
+      if(respuesta == 0){
+                boton_borrar.setEnabled(false);
+                boton_buscar_valor.setEnabled(false);
+                boton_imprimir.setEnabled(false);
+                boton_insertar.setEnabled(false);
+                boton_obtener_altura.setEnabled(false);
+                boton_obtener_nivel.setEnabled(false);
+                boton_reiniciar.setEnabled(false);
+                boto_CrearArbol.setEnabled(true);
+                JOptionPane.showMessageDialog(null,"El programa se reinicio","Reinicio programa",JOptionPane.INFORMATION_MESSAGE);
+                
+      }
+    }//GEN-LAST:event_boton_reiniciarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -383,6 +466,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton boton_insertar;
     private javax.swing.JButton boton_obtener_altura;
     private javax.swing.JButton boton_obtener_nivel;
+    private javax.swing.JButton boton_reiniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -390,5 +474,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }
