@@ -5,7 +5,7 @@
  */
 package arbolesb;
 
-import java.awt.Menu;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -21,6 +21,7 @@ public class ArbolesB {
     public static void main(String[] args) {
        Menu menu = new Menu();
        menu.setVisible(true);
+     
       
     } 
     
